@@ -4,7 +4,10 @@
 }
 
 :root {
-    --lightGray: rgb(138, 138, 138);
+    --lighterGray: rgb(101, 101, 101);
+    --lightGray: rgb(92, 92, 92);
+    --hoverColor: rgb(210, 210, 210);
+    --activeColor: rgb(195,195,195)
 }
 
 * {
@@ -64,6 +67,7 @@ label {
     --labelWidth: var(--iconWidth);
     --labelHeight: var(--iconHeight);
 
+    padding-top: 5px;
     padding-right: 8px;
 }
 form {
@@ -108,9 +112,6 @@ form {
     align-items: center;
     justify-content: end;
 
-    --hoverColor: rgb(231, 231, 231);
-    --activeColor: rgb(221, 221, 221);
-
     width: 100%;
     height: 25px;
     padding: 5px;
@@ -148,6 +149,7 @@ form {
     flex-wrap: wrap;
     gap: 16px;
     row-gap: 2rem;
+    color: var(--lightGray);
 
     height: 100%;
     padding: 16px 10px 16px 20px;
@@ -162,6 +164,7 @@ form {
     width: min(220px);
     height: 275px;
     
+    color: var(--lightGray);
     background-color: var(--bgColor);
     flex-shrink: 0;
 }
@@ -179,16 +182,65 @@ form {
     width: 100%;
     filter: opacity(.2);
 }
+/* Book Hover "Animation" */
 .book-desc {
     position: absolute;
     top: 0;
-    right: -100%;
+    right: -100%; /* Off screen */
+    transition: .5s;
 
+    display: flex;
+    flex-direction: column;
+
+    padding: 8px;
+    padding-top: 1rem;
     width: 150px;
     height: 100%;
     background-color: var(--bgColor);
+    color: black;
 }
 .book:hover .book-desc{
     right: 0;
-    transition: .5s;
+}
+.book-title {
+    font-size: 20px;
+}
+.book-author {
+    margin-top: 8px;
+    font-size: 15px;
+}
+.book-pages {
+    margin-top: 8px;
+    font-size: 12px;
+}
+/* Book actions */
+.book-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+.book-actions div {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.book-actions div:hover {
+    background-color: var(--hoverColor);
+}
+.book-actions div:active {
+    background-color: var(--activeColor);
+}
+.book-action-text {
+    margin-top: 3px;
+    font-size: 14px;
+    user-select: none;
+    cursor: pointer;
+}
+.book-action-icon {
+    --iconSize: 16px;
+    width: var(--iconSize);
+    height: var(--iconSize);
+    user-select: none;
+    margin-right: auto;
+    margin-left: 1.5rem;
 }
