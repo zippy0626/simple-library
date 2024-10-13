@@ -1,0 +1,118 @@
+@font-face {
+    font-family: 'Uni-sans';
+    src: url('assets/fonts/Uni\ Sans\ Thin.woff2') format('woff2');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 240px minmax(600px,1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "nav books"
+    ;
+
+    height: 100%;
+    font-family: "Uni-sans", Arial, Helvetica, sans-serif;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+label {
+    cursor: pointer;
+}
+
+
+/* Side Nav */
+.side-nav {
+    grid-column: 1/2;
+    width: 240px;
+    height: clamp(700px, 100%, 100vh); 
+
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    position: fixed;
+    background-color: whitesmoke;
+    font-family: "Uni-sans", Arial, Helvetica, sans-serif;
+}
+.logo-text {
+    width: fit-content;
+    font-size: 1.6rem;
+    color: rgb(138, 138, 138);
+}
+.side-nav-logo {
+    padding-top: 10px;
+    padding-right: 16px;
+}
+.side-nav-search {
+    --iconWidth: 32px;
+    --iconHeight: 32px;
+    --labelWidth: var(--iconWidth);
+    --labelHeight: var(--iconHeight);
+
+    padding-right: 16px;
+}
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-icon {
+    width: var(--iconWidth);
+    height: var(--iconHeight);
+
+}
+.side-nav-search label {
+    width: var(--labelWidth);
+    height: var(--labelHeight);
+}
+#search-bar {
+    width: 175px;
+
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 16px;
+    color: grey;
+
+    border-radius: 1rem;
+    border: grey 1px solid;
+    padding: 1px 8px 0 8px;
+}
+#search-bar:focus-visible {
+    outline: 1px rgb(72, 72, 72) solid;
+}
+#search-bar::placeholder {
+    text-align: end;
+}
+
+
+/* Book Section */
+.book-section {
+    grid-column: 2/3;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    row-gap: 2rem;
+
+    height: 100%;
+    padding: 16px 10px 16px 20px;
+    background-color: white;
+}
+.book {
+    width: min(220px);
+    height: 275px;
+    
+    background-color: rgb(232, 232, 232);
+    flex-shrink: 0;
+}
