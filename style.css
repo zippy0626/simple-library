@@ -54,8 +54,8 @@ label {
     padding-right: 16px;
 }
 .side-nav-search {
-    --iconWidth: 32px;
-    --iconHeight: 32px;
+    --iconWidth: 31px;
+    --iconHeight: 31px;
     --labelWidth: var(--iconWidth);
     --labelHeight: var(--iconHeight);
 
@@ -83,7 +83,7 @@ form {
     font-size: 16px;
     color: grey;
 
-    border-radius: 1rem;
+    border-radius: .6rem;
     border: grey 1px solid;
     padding: 1px 8px 0 8px;
 }
