@@ -3,6 +3,10 @@
     src: url('assets/fonts/Uni\ Sans\ Thin.woff2') format('woff2');
 }
 
+:root {
+    --lightGray: rgb(138, 138, 138);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -47,19 +51,20 @@ label {
 .logo-text {
     width: fit-content;
     font-size: 1.6rem;
-    color: rgb(138, 138, 138);
+    font-weight: 200;
+    color: var(--lightGray);
 }
 .side-nav-logo {
     padding-top: 10px;
-    padding-right: 16px;
+    padding-right: 8px;
 }
 .side-nav-search {
-    --iconWidth: 31px;
-    --iconHeight: 31px;
+    --iconWidth: 22px;
+    --iconHeight: 22px;
     --labelWidth: var(--iconWidth);
     --labelHeight: var(--iconHeight);
 
-    padding-right: 16px;
+    padding-right: 8px;
 }
 form {
     display: flex;
@@ -69,7 +74,6 @@ form {
 .search-icon {
     width: var(--iconWidth);
     height: var(--iconHeight);
-
 }
 .side-nav-search label {
     width: var(--labelWidth);
@@ -81,17 +85,58 @@ form {
     font-family: inherit;
     font-weight: bold;
     font-size: 16px;
-    color: grey;
+    color: var(--lightGray);
 
     border-radius: .6rem;
-    border: grey 1px solid;
+    border: var(--lightGray) 1px solid;
     padding: 1px 8px 0 8px;
+    margin-left: 5px;
 }
 #search-bar:focus-visible {
     outline: 1px rgb(72, 72, 72) solid;
 }
 #search-bar::placeholder {
     text-align: end;
+}
+/* Nav Tabs */
+.nav-tabs {
+    width: 150px;
+    height: 300px;
+    margin-top: 2rem;
+}
+.tab {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    --hoverColor: rgb(231, 231, 231);
+    --activeColor: rgb(221, 221, 221);
+
+    width: 100%;
+    height: 25px;
+    padding: 5px;
+    user-select: none;
+    cursor: pointer;
+}
+.tab:hover {
+    background-color: var(--hoverColor);
+}
+.tab:active {
+    background-color: var(--activeColor);
+}
+.tab p {
+    font-size: 12px;
+    font-weight: 200;
+    margin-top: 3px;
+    text-align: start;
+}
+.nav-tab-icon {
+    --iconSize: 16px;
+    width: var(--iconSize);
+    height: var(--iconSize);
+    user-select: none;
+    margin-right: auto;
+    margin-left: 1.5rem;
 }
 
 
