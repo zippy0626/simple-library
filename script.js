@@ -9,9 +9,6 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
-const book1 = new Book("A", "Niggaman", 320, false);
-myLibrary.push(book1)
-
 function addNewBook() {
   
 }
@@ -25,3 +22,23 @@ function removeBook() {
 function showAllBooks() {
     
 }
+
+
+// Show and Hide Modal
+const overlay = document.querySelector('.overlay');
+const modal = document.querySelector('.modal');
+
+const cancelBtn = document.querySelector('.cancel-btn');
+const addNewBookBtn = document.querySelector('.add-new-book');
+
+function showModal() {
+    modal.classList.remove('hidden')
+    overlay.classList.remove('hidden')
+}
+addNewBookBtn.addEventListener('click', showModal);
+
+function hideModal() {
+    modal.classList.add('hidden');
+    overlay.classList.add('hidden');
+}
+cancelBtn.addEventListener('click', hideModal);
