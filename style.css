@@ -6,8 +6,9 @@
 :root {
     --lighterGray: rgb(101, 101, 101);
     --lightGray: rgb(92, 92, 92);
-    --hoverColor: rgb(210, 210, 210);
-    --activeColor: rgb(195, 195, 195)
+    --hoverColor: rgb(219, 219, 219);
+    --activeColor: rgb(195, 195, 195);
+    --fontFamily: "Uni-sans", Arial, Helvetica, sans-serif;
 }
 
 * {
@@ -295,6 +296,9 @@ label {
 }
 
 .modal {
+    --inputBg: rgba(233, 233, 233, 0.1);
+    --inputBorder: rgb(201, 201, 201) 1px solid;
+
     z-index: 2;
     position: fixed;
     top: 50%;
@@ -310,7 +314,7 @@ label {
 
 .modal-desc {
     font-size: 18px;
-    padding: 8px;
+    padding: 1rem 10px 10px 16px;
 }
 
 /* Form Styling */
@@ -321,7 +325,7 @@ label {
     width: 100%;
     height: 450px;
 
-    padding: 0 16px 0 16px;
+    padding: 2rem 10px 10px 16px;
     font-size: 13px;
 }
 
@@ -346,11 +350,11 @@ label {
 
     margin-left: auto;
     border-radius: 2px;
-    border: rgb(201, 201, 201) 1px solid;
+    border: var(--inputBorder);
     padding: 1px 8px 0 8px;
     margin-top: 1px;
     font-family: inherit;
-    background-color: rgba(233, 233, 233, 0.1);
+    background-color: var(--inputBg);
 }
 
 .form-input-container input:focus-visible {
@@ -383,7 +387,7 @@ input[type="radio"] {
     border-radius: 50%;
     width: 15px;
     height: 15px;
-    border: 1px solid rgb(201, 201, 201);
+    border: var(--inputBorder);
     position: relative;
     cursor: pointer;
 }
@@ -397,7 +401,7 @@ input[type="radio"]::before {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: rgba(233, 233, 233, 0.1);
+    background-color: var(--inputBg);
     /* Inner background color for unchecked */
 }
 /* Style for checked state */
@@ -413,6 +417,32 @@ input[type="radio"]:checked::after {
     background-color: grey;
     /* Color of the inner dot */
     border-radius: 50%;
+}
+/* Form Upload File Container + Input Button */
+#form-upload-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+#book-img { /* This is the input container */
+    color: transparent;
+    width: 90px;
+    margin-left: auto;
+}
+#book-img::file-selector-button { /* This is the actual button */
+    background-color: var(--inputBg);
+    border: var(--inputBorder);
+    font-family: var(--fontFamily);
+    padding: 2px 5px 0 5px ;
+    margin: 0;
+    margin-left: 8px;
+    font-size: 12px;
+}
+#book-img::file-selector-button:hover {
+    background-color: var(--hoverColor);
+}
+#book-img::file-selector-button:active {
+    background-color: var(--activeColor);
 }
 
 

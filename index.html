@@ -87,7 +87,7 @@
     <div class="modal hidden">
         <p class="modal-desc">Add New Book</p>
 
-        <form action="">
+        <form action="post">
             <div class="form-input-container">
                 <label for="book-title">Book Title</label>
                 <input type="text" id="book-title" name="bookTitle" aria-required="true" required="true">
@@ -104,14 +104,19 @@
             </div>
 
             <div class="form-radio-buttons">
-                <p class="form-text">Already Read</p>
+                <p class="form-text">Already Read?</p>
                 
                 <div>
                     <label for="is-read-yes">Yes</label>
-                    <input type="radio" id="is-read-yes" name="is-read" value="Yes">
+                    <input type="radio" id="is-read-yes" name="isRead" value="Yes">
                     <label for="is-read-no">No</label>
-                    <input type="radio" id="is-read-no" name="is-read" value="No">
+                    <input type="radio" id="is-read-no" name="isRead" value="No">
                 </div>
+            </div>
+
+            <div id="form-upload-container">
+                <label for="book-img">Upload Cover Image</label>
+                <input type="file" id="book-img" name="bookImg" title=" ">
             </div>
 
             <div class="form-sc-btn-container">
