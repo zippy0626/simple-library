@@ -374,6 +374,7 @@ label {
 
 .form-radio-buttons label {
     margin: 3px 6px 0 6px !important;
+    user-select: none;
 }
 /* Hide the default appearance */
 input[type="radio"] {
@@ -415,7 +416,6 @@ input[type="radio"]:checked::after {
 }
 
 
-
 /* Submit, cancel Btns */
 .form-sc-btn-container {
     width: 100%;
@@ -440,6 +440,7 @@ input[type="radio"]:checked::after {
     padding: 4px;
     font-family: inherit;
     text-align: end;
+    user-select: none;
 }
 
 .form-sc-btns button:hover {
