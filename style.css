@@ -162,7 +162,7 @@ form {
     position: relative;
     overflow: hidden;
     width: min(220px);
-    height: 275px;
+    height: 290px;
     
     color: var(--lightGray);
     background-color: var(--bgColor);
@@ -242,5 +242,9 @@ form {
     height: var(--iconSize);
     user-select: none;
     margin-right: auto;
-    margin-left: 1.5rem;
+    margin-left: 1.3rem;
+}
+/* Already Read Option */
+#contain-book-already-read {
+    display: none !important;
 }
