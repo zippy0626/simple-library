@@ -70,7 +70,7 @@ label {
     padding-top: 5px;
     padding-right: 8px;
 }
-form {
+.side-nav-search form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -180,7 +180,7 @@ form {
     top: 0;
     right: 0;
     width: 100%;
-    filter: opacity(.2);
+    transition: .5s;
 }
 /* Book Hover "Animation" */
 .book-desc {
@@ -199,8 +199,12 @@ form {
     background-color: var(--bgColor);
     color: black;
 }
-.book:hover .book-desc{
-    right: 0;
+.book:hover .book-desc {
+    right: 0; /* Comes back on screen */
+}
+/* change background */
+.book:hover .book-img-container>img {
+    filter: opacity(.4);
 }
 .book-title {
     font-size: 20px;
@@ -247,4 +251,88 @@ form {
 /* Already Read Option */
 #contain-book-already-read {
     display: none !important;
+}
+
+
+/* Modal */
+.hidden {
+    display: none;
+}
+.modal {
+    z-index: 2;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 400px;
+    height: 500px;
+    background-color: whitesmoke;
+    /* box-shadow: 
+        1px 1px 1px rgba(128, 128, 128, 0.219),
+        -1px -1px 1px rgba(128, 128, 128, 0.219)
+    ; */
+    padding: 8px;
+}
+.modal-desc {
+    font-size: 18px;
+}
+/* Form Styling */
+.modal form {
+    display: flex;
+    flex-direction: column;
+
+    width: 75%;
+    height: 450px;
+
+    padding: 8px;
+    font-size: 13px;
+}
+.modal form div {
+    display: flex;
+    align-items: center;
+}
+/* Manual align */
+.modal form label, .form-text {
+    margin-top: 3px;
+}
+/* Inputs */
+.form-input {
+    margin-bottom: 5px;
+}
+.modal form .form-input input {
+    height: 22px;
+    width: 150px;
+
+    margin-left: auto;
+    border-radius: 2px;
+    border: var(--lightGray) 1px solid;
+    padding: 1px 8px 0 8px;
+    margin-top: 1px;
+    font-family: inherit;
+}
+.modal form .form-input input:focus-visible {
+    outline: 1px grey solid;
+}
+#book-pages {
+    width: 60px;
+}
+/* Radio btns */
+.radio-buttons div {
+    margin-left: auto;
+}
+.radio-buttons div label {
+    margin: 4px 8px 0 5px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    z-index: 1;
 }
