@@ -7,7 +7,7 @@
     --lighterGray: rgb(101, 101, 101);
     --lightGray: rgb(92, 92, 92);
     --hoverColor: rgb(210, 210, 210);
-    --activeColor: rgb(195,195,195)
+    --activeColor: rgb(195, 195, 195)
 }
 
 * {
@@ -18,7 +18,7 @@
 
 body {
     display: grid;
-    grid-template-columns: 240px minmax(600px,1fr);
+    grid-template-columns: 240px minmax(600px, 1fr);
     grid-template-rows: 1fr;
     grid-template-areas:
         "nav books"
@@ -32,6 +32,7 @@ body {
     width: 30px;
     height: 30px;
 }
+
 label {
     cursor: pointer;
 }
@@ -41,7 +42,7 @@ label {
 .side-nav {
     grid-column: 1/2;
     width: 240px;
-    height: clamp(700px, 100%, 100vh); 
+    height: clamp(700px, 100%, 100vh);
 
     display: flex;
     flex-direction: column;
@@ -51,16 +52,19 @@ label {
     background-color: whitesmoke;
     font-family: "Uni-sans", Arial, Helvetica, sans-serif;
 }
+
 .logo-text {
     width: fit-content;
     font-size: 1.6rem;
     font-weight: 200;
     color: var(--lightGray);
 }
+
 .side-nav-logo {
     padding-top: 10px;
     padding-right: 8px;
 }
+
 .side-nav-search {
     --iconWidth: 22px;
     --iconHeight: 22px;
@@ -70,19 +74,23 @@ label {
     padding-top: 5px;
     padding-right: 8px;
 }
+
 .side-nav-search form {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .search-icon {
     width: var(--iconWidth);
     height: var(--iconHeight);
 }
+
 .side-nav-search label {
     width: var(--labelWidth);
     height: var(--labelHeight);
 }
+
 #search-bar {
     width: 175px;
 
@@ -94,19 +102,24 @@ label {
     border: var(--lightGray) 1px solid;
     padding: 1px 8px 0 8px;
     margin-left: 5px;
+    background-color: rgb(233, 233, 233, 0.1);
 }
+
 #search-bar:focus-visible {
     outline: 1px rgb(72, 72, 72) solid;
 }
+
 #search-bar::placeholder {
     text-align: end;
 }
+
 /* Nav Tabs */
 .nav-tabs {
     width: 150px;
     height: 300px;
     margin-top: 2rem;
 }
+
 .tab {
     display: flex;
     align-items: center;
@@ -118,18 +131,22 @@ label {
     user-select: none;
     cursor: pointer;
 }
+
 .tab:hover {
     background-color: var(--hoverColor);
 }
+
 .tab:active {
     background-color: var(--activeColor);
 }
+
 .tab p {
     font-size: 12px;
     font-weight: 200;
     margin-top: 3px;
     text-align: start;
 }
+
 .nav-tab-icon {
     --iconSize: 16px;
     width: var(--iconSize);
@@ -155,6 +172,7 @@ label {
     padding: 16px 10px 16px 20px;
     background-color: white;
 }
+
 /* Book card */
 .book {
     --bgColor: rgb(232, 232, 232);
@@ -163,11 +181,12 @@ label {
     overflow: hidden;
     width: min(220px);
     height: 290px;
-    
+
     color: var(--lightGray);
     background-color: var(--bgColor);
     flex-shrink: 0;
 }
+
 .book-img-container {
     height: 100%;
 
@@ -175,6 +194,7 @@ label {
     justify-content: center;
     align-items: center;
 }
+
 .book-img-container img {
     position: absolute;
     top: 0;
@@ -182,11 +202,13 @@ label {
     width: 100%;
     transition: .5s;
 }
+
 /* Book Hover "Animation" */
 .book-desc {
     position: absolute;
     top: 0;
-    right: -100%; /* Off screen */
+    right: -100%;
+    /* Off screen */
     transition: .5s;
 
     display: flex;
@@ -199,47 +221,59 @@ label {
     background-color: var(--bgColor);
     color: black;
 }
+
 .book:hover .book-desc {
-    right: 0; /* Comes back on screen */
+    right: 0;
+    /* Comes back on screen */
 }
+
 /* change background */
 .book:hover .book-img-container>img {
     filter: opacity(.4);
 }
+
 .book-title {
     font-size: 20px;
 }
+
 .book-author {
     margin-top: 8px;
     font-size: 15px;
 }
+
 .book-pages {
     margin-top: 8px;
     font-size: 12px;
 }
+
 /* Book actions */
 .book-actions {
     display: flex;
     flex-direction: column;
     margin-top: auto;
 }
+
 .book-actions div {
     display: flex;
     justify-content: end;
     align-items: center;
 }
+
 .book-actions div:hover {
     background-color: var(--hoverColor);
 }
+
 .book-actions div:active {
     background-color: var(--activeColor);
 }
+
 .book-action-text {
     margin-top: 3px;
     font-size: 14px;
     user-select: none;
     cursor: pointer;
 }
+
 .book-action-icon {
     --iconSize: 16px;
     width: var(--iconSize);
@@ -248,6 +282,7 @@ label {
     margin-right: auto;
     margin-left: 1.3rem;
 }
+
 /* Already Read Option */
 #contain-book-already-read {
     display: none !important;
@@ -258,6 +293,7 @@ label {
 .hidden {
     display: none;
 }
+
 .modal {
     z-index: 2;
     position: fixed;
@@ -268,62 +304,152 @@ label {
     width: 400px;
     height: 500px;
     background-color: whitesmoke;
-    /* box-shadow: 
-        1px 1px 1px rgba(128, 128, 128, 0.219),
-        -1px -1px 1px rgba(128, 128, 128, 0.219)
-    ; */
-    padding: 8px;
+    font-family: inherit;
+    color: black;
 }
+
 .modal-desc {
     font-size: 18px;
+    padding: 8px;
 }
+
 /* Form Styling */
 .modal form {
     display: flex;
     flex-direction: column;
 
-    width: 75%;
+    width: 100%;
     height: 450px;
 
-    padding: 8px;
+    padding: 0 16px 0 16px;
     font-size: 13px;
 }
-.modal form div {
-    display: flex;
-    align-items: center;
-}
-/* Manual align */
-.modal form label, .form-text {
+
+/* Manual align text*/
+.modal form label,
+.form-text {
     margin-top: 3px;
 }
-/* Inputs */
-.form-input {
-    margin-bottom: 5px;
+
+/* Input Containers */
+.form-input-container,
+.form-radio-buttons {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
 }
-.modal form .form-input input {
+
+/* Input box Styling */
+.form-input-container input {
     height: 22px;
     width: 150px;
 
     margin-left: auto;
     border-radius: 2px;
-    border: var(--lightGray) 1px solid;
+    border: rgb(201, 201, 201) 1px solid;
     padding: 1px 8px 0 8px;
     margin-top: 1px;
     font-family: inherit;
+    background-color: rgba(233, 233, 233, 0.1);
 }
-.modal form .form-input input:focus-visible {
+
+.form-input-container input:focus-visible {
     outline: 1px grey solid;
 }
+
 #book-pages {
-    width: 60px;
+    width: 65px;
 }
+
 /* Radio btns */
-.radio-buttons div {
+.form-radio-buttons {
+    margin-top: 8px;
+}
+
+.form-radio-buttons div {
+    display: flex;
+    align-items: center;
     margin-left: auto;
 }
-.radio-buttons div label {
-    margin: 4px 8px 0 5px;
+
+.form-radio-buttons label {
+    margin: 3px 6px 0 6px !important;
 }
+/* Hide the default appearance */
+input[type="radio"] {
+    appearance: none;
+    background-color: transparent;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgb(201, 201, 201);
+    position: relative;
+    cursor: pointer;
+}
+/* Add a background for the unchecked state */
+input[type="radio"]::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(233, 233, 233, 0.1);
+    /* Inner background color for unchecked */
+}
+/* Style for checked state */
+input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    /* Inner dot size */
+    height: 8px;
+    background-color: grey;
+    /* Color of the inner dot */
+    border-radius: 50%;
+}
+
+
+
+/* Submit, cancel Btns */
+.form-sc-btn-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.form-sc-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.form-sc-btns button {
+    width: 120px;
+    height: 20px;
+    border: none;
+    background-color: transparent;
+    padding: 4px;
+    font-family: inherit;
+    text-align: end;
+}
+
+.form-sc-btns button:hover {
+    background-color: var(--hoverColor);
+}
+
+.form-sc-btns button:active {
+    background-color: var(--activeColor);
+}
+
 
 .overlay {
     position: fixed;
