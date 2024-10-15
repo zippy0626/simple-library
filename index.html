@@ -45,7 +45,8 @@
     </div>
 
     <div class="book-section">
-        <div class="book">
+        
+        <div class="book" data-index-number="0">
             <div class="book-img-container">
                 <img src="assets/the-hunger-games-cover.jpg" alt="book cover">
             </div>
@@ -59,13 +60,13 @@
                         <p class="book-read-now book-action-text">Read Now</p>
                     </div>
 
-                    <div id="contain-book-mark-read">
+                    <div class="contain-book-mark-read" onclick="toggleReadStatus(this)">
                         <p class="book-mark-read book-action-text">Mark as Read</p>
                     </div>
 
-                    <div id="contain-book-already-read">
+                    <div class="contain-book-already-read hidden" onclick="toggleReadStatus(this)">
                         <img src="assets/icons/check.svg" alt="Already Read" class="icon book-action-icon">
-                        <p class="book-mark-read book-action-text">Already Read</p>
+                        <p class="book-already-read book-action-text">Already Read</p>
                     </div>
 
                     <div>
@@ -74,33 +75,37 @@
                 </div>
             </div>
         </div>
-        <div class="book"></div>
-        <div class="book"></div>
-        <div class="book"></div>
-        <div class="book"></div>
-        <div class="book"></div>
-        <div class="book"></div>
-        <div class="book"></div>
-        <div class="book"></div>
     </div>
 
     <div class="modal hidden">
         <p class="modal-desc">Add New Book</p>
 
-        <form action="post">
+        <form action="post" id="form">
             <div class="form-input-container">
                 <label for="book-title">Book Title</label>
-                <input type="text" id="book-title" name="bookTitle" aria-required="true" required="true">
+                <input type="text" id="book-title" name="bookTitle"
+                    aria-required="true" required="true" 
+                    pattern="^[a-zA-Z0-9 ,.'!?:\-]+$" 
+                    minlength="2" maxlength="75"
+                >
             </div>
 
             <div class="form-input-container">
                 <label for="book-author">Book Author</label>
-                <input type="text" id="book-author" name="bookAuthor" aria-required="true" required="true">
+                <input type="text" id="book-author" name="bookAuthor" 
+                    aria-required="true" required="true" 
+                    pattern="^[a-zA-Z0-9 ,.'!?:\-]+$" 
+                    minlength="2" maxlength="75"
+                >
             </div>
 
             <div class="form-input-container">
                 <label for="book-pages">Pages</label>
-                <input type="number" id="book-pages" name="bookPages" aria-required="true" required="true">
+                <input type="number" id="book-pages" name="bookPages" 
+                    aria-required="false"
+                    pattern="^([1-9][0-9]*)$"
+                    minlength="1" maxlength="5"
+                >
             </div>
 
             <div class="form-radio-buttons">
@@ -108,9 +113,9 @@
                 
                 <div>
                     <label for="is-read-yes">Yes</label>
-                    <input type="radio" id="is-read-yes" name="isRead" value="Yes">
+                    <input type="radio" id="is-read-yes" name="isRead" value="yes">
                     <label for="is-read-no">No</label>
-                    <input type="radio" id="is-read-no" name="isRead" value="No">
+                    <input type="radio" id="is-read-no" name="isRead" value="no">
                 </div>
             </div>
 
