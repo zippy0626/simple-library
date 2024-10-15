@@ -165,10 +165,12 @@ function showAllBooks() {}
 
 
 // Remove Book Func + Confirm Modal
+
 // actual modal
 const confirmDeleteModal = document.querySelector('.modal-confirm-delete'); 
 const confirmYesBtn = document.querySelector('.confirm-yes-btn');
 const confirmCancelBtn = document.querySelector('.confirm-cancel-btn');
+
 // its own overlay
 const confirmModOverlay = document.querySelector('.confirm-modal-overlay');
 
@@ -184,6 +186,7 @@ function hideConfirmDelModal() {
   confirmDeleteModal.classList.add("hidden")
   confirmModOverlay.classList.add("hidden")
 }
+// If user clicks blur overlay it cancels modal
 confirmModOverlay.addEventListener('click', hideConfirmDelModal);
 
 //Remove
@@ -192,12 +195,13 @@ function removeBook() {
 
   let bookIndex = bookElement.dataset.indexNumber
   console.log(bookIndex);
-  if (myLibrary[bookIndex] != undefined) {
+  if (myLibrary[bookIndex] != undefined) {//if book exits
     myLibrary[bookIndex] = undefined
   }
 
   hideConfirmDelModal()
 }
+// Yes btn
 confirmYesBtn.addEventListener('click', () => {
   removeBook()
 });
