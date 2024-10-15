@@ -10,6 +10,10 @@ function Book(title, author, pages, isRead) {
   // this.image = image;
 }
 
+// The hunger Games Obj
+
+const book1 = new Book("The Hunger Games", "Suzanne Collins", 300, "no");
+myLibrary.push(book1)
 
 // MODAL FUNCTIONALITY
 const overlay = document.querySelector(".overlay");
@@ -139,7 +143,6 @@ function toggleReadStatus(element) {// this keyword in HTML
   // Find the nearest .book element (the parent container for the current book)
   const bookElement = element.closest('.book');
   let bookIndex = bookElement.dataset.indexNumber
-  console.log(bookIndex);
   
   // Get nearest read status elements
   const markAsRead = bookElement.querySelector('.contain-book-mark-read');
