@@ -53,13 +53,16 @@ form.addEventListener("submit", (e) => {
   const bookTitle = formData.get("bookTitle");
   const bookAuthor = formData.get("bookAuthor");
   let bookPages = formData.get("bookPages");
-  const isRead = formData.get("isRead");
+  let isRead = formData.get("isRead");
   const bookImg = formData.get("bookImg");
 
   console.log(`value of isRead: ${isRead}`);
 
-  if (bookPages.slice(0, 1) === "0" || !bookPages) {
+  if (bookPages.slice(0, 1) === "0" || !bookPages || bookPages < 0) {
     bookPages = "?";
+  }
+  if (isRead === null) {
+    isRead = "no"
   }
 
   console.log(bookTitle, bookAuthor, bookPages, isRead);
@@ -117,7 +120,7 @@ function addNewBook(bookTitle, bookAuthor, bookPages, isRead) {
         </div>`
         }
 
-        <div>
+        <div onclick="removeBook()">
           <p class="book-delete book-action-text">Delete</p>
         </div>
       </div>
@@ -135,18 +138,33 @@ function toggleReadStatus(element) {// this keyword in HTML
   
   // Find the nearest .book element (the parent container for the current book)
   const bookElement = element.closest('.book');
+  let bookIndex = bookElement.dataset.indexNumber
+  console.log(bookIndex);
   
   // Get nearest read status elements
   const markAsRead = bookElement.querySelector('.contain-book-mark-read');
   const alreadyRead = bookElement.querySelector('.contain-book-already-read');
 
   // Toggle hidden class for both
+  if (myLibrary[bookIndex].isRead === "yes") {
+    myLibrary[bookIndex].isRead = "no";
+  } else if (myLibrary[bookIndex].isRead === "no") {
+    myLibrary[bookIndex].isRead = "yes"
+  } else if (myLibrary[bookIndex].isRead === null) {
+    myLibrary[bookIndex].isRead = "yes"
+  }
+
   markAsRead.classList.toggle('hidden');
   alreadyRead.classList.toggle('hidden');
 }
 
-function removeBook() {}
-
 // Call this at start of website
 // Use myLibrary array index to add index as DOM element attribute
 function showAllBooks() {}
+
+// Remove Book Func + Confirm Modal
+
+
+function removeBook() {
+  console.log("Hello");
+}
