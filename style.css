@@ -489,3 +489,53 @@ input[type="radio"]:checked::after {
     backdrop-filter: blur(5px);
     z-index: 1;
 }
+
+/* Modal Confirm Delete */
+.modal-confirm-delete {
+    --inputBg: rgba(233, 233, 233, 0.1);
+    --inputBorder: rgb(201, 201, 201) 1px solid;
+
+    z-index: 2;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+
+    width: 300px;
+    height: 150px;
+    background-color: whitesmoke;
+    font-family: inherit;
+    color: black;
+}
+.modal-text {
+    font-size: 14px;
+    padding: 0 10px 10px 16px;
+}
+.modal-confirm-delete-button-container {
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    padding: 4px;
+    user-select: none;
+}
+.modal-confirm-delete-buttons button {
+    width: 70px;
+    height: 20px;
+    border: none;
+    background-color: transparent;
+    padding: 4px;
+    margin-left: 3px;
+    font-family: inherit;
+    text-align: center;
+    user-select: none;
+}
+.modal-confirm-delete-buttons button:hover {
+    background-color: var(--hoverColor);
+}
+.modal-confirm-delete-buttons button:active {
+    background-color: var(--activeColor);
+}

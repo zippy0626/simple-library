@@ -120,7 +120,7 @@ function addNewBook(bookTitle, bookAuthor, bookPages, isRead) {
         </div>`
         }
 
-        <div onclick="removeBook()">
+        <div onclick="showConfirmDelModal(this)">
           <p class="book-delete book-action-text">Delete</p>
         </div>
       </div>
@@ -145,7 +145,7 @@ function toggleReadStatus(element) {// this keyword in HTML
   const markAsRead = bookElement.querySelector('.contain-book-mark-read');
   const alreadyRead = bookElement.querySelector('.contain-book-already-read');
 
-  // Toggle hidden class for both
+  // Update Object based on it's own index in array
   if (myLibrary[bookIndex].isRead === "yes") {
     myLibrary[bookIndex].isRead = "no";
   } else if (myLibrary[bookIndex].isRead === "no") {
@@ -154,6 +154,7 @@ function toggleReadStatus(element) {// this keyword in HTML
     myLibrary[bookIndex].isRead = "yes"
   }
 
+  // Toggle hidden class for both
   markAsRead.classList.toggle('hidden');
   alreadyRead.classList.toggle('hidden');
 }
@@ -162,9 +163,41 @@ function toggleReadStatus(element) {// this keyword in HTML
 // Use myLibrary array index to add index as DOM element attribute
 function showAllBooks() {}
 
+
 // Remove Book Func + Confirm Modal
+// actual modal
+const confirmDeleteModal = document.querySelector('.modal-confirm-delete'); 
+const confirmYesBtn = document.querySelector('.confirm-yes-btn');
+const confirmCancelBtn = document.querySelector('.confirm-cancel-btn');
+// its own overlay
+const confirmModOverlay = document.querySelector('.confirm-modal-overlay');
 
+// Capture the clicked element with outside variable
+let bookElement = undefined;
+function showConfirmDelModal(element) {
+  confirmDeleteModal.classList.remove("hidden")
+  confirmModOverlay.classList.remove("hidden")
 
-function removeBook() {
-  console.log("Hello");
+  bookElement = element.closest(".book")
 }
+function hideConfirmDelModal() {
+  confirmDeleteModal.classList.add("hidden")
+  confirmModOverlay.classList.add("hidden")
+}
+confirmModOverlay.addEventListener('click', hideConfirmDelModal);
+
+//Remove
+function removeBook() {
+  bookElement.remove()
+
+  let bookIndex = bookElement.dataset.indexNumber
+  console.log(bookIndex);
+  if (myLibrary[bookIndex] != undefined) {
+    myLibrary[bookIndex] = undefined
+  }
+
+  hideConfirmDelModal()
+}
+confirmYesBtn.addEventListener('click', () => {
+  removeBook()
+});
