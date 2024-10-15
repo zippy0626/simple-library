@@ -380,6 +380,7 @@ label {
     margin: 3px 6px 0 6px !important;
     user-select: none;
 }
+/* This is a custom input radio button, learn how this works */
 input[type="radio"] {
     appearance: none;
     background-color: transparent;
