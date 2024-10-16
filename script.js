@@ -10,10 +10,11 @@ function Book(title, author, pages, isRead) {
   // this.image = image;
 }
 
-// The hunger Games Obj
 
+// The Hunger Games Book Obj
 const book1 = new Book("The Hunger Games", "Suzanne Collins", 300, "no");
 myLibrary.push(book1)
+
 
 // MODAL FUNCTIONALITY
 const overlay = document.querySelector(".overlay");
@@ -88,7 +89,7 @@ function addNewBook(bookTitle, bookAuthor, bookPages, isRead) {
 
   const bookElement = document.createElement("div");
   bookElement.classList.add("book");
-  bookElement.dataset.indexNumber = myLibrary.indexOf(newBook); //Assign index to HTML .book element
+  bookElement.dataset.indexNumber = myLibrary.indexOf(newBook); // Assign index to HTML .book element
   bookElement.innerHTML = `
     <div class="book-img-container">
       <img src="" alt="book cover">
@@ -138,9 +139,9 @@ function addNewBook(bookTitle, bookAuthor, bookPages, isRead) {
 
 
 // TOGGLE MARK READ/ALREADY READ IN LINE HTML
-function toggleReadStatus(element) {// this keyword in HTML 
+function toggleReadStatus(element) {// this keyword in HTML captures the clicked element
   
-  // Find the nearest .book element (the parent container for the current book)
+  // Get Index of closest book ele
   const bookElement = element.closest('.book');
   let bookIndex = bookElement.dataset.indexNumber
   
@@ -192,13 +193,12 @@ function hideConfirmDelModal() {
 // If user clicks blur overlay it cancels modal
 confirmModOverlay.addEventListener('click', hideConfirmDelModal);
 
-//Remove
 function removeBook() {
   bookElement.remove()
 
   let bookIndex = bookElement.dataset.indexNumber
   console.log(bookIndex);
-  if (myLibrary[bookIndex] != undefined) {//if book exits
+  if (myLibrary[bookIndex] != undefined) {// if book exits
     myLibrary[bookIndex] = undefined
   }
 
