@@ -25,6 +25,10 @@ exampleBooks.forEach((book) => {
 // BOOK CONTAINER
 const bookContainer = document.querySelector('.book-section');
 
+function removeAllBooks() {
+  bookContainer.innerHTML = "";
+}
+
 function showAllBooks() {
   myLibrary.forEach((book) => {
     addBookToDOM(book)
@@ -223,7 +227,3 @@ confirmYesBtn.addEventListener('click', removeBook)
 
 // RECENTLY READ BOOK TAB BUTTON
 const recentlyReadTabBtn = document.querySelector('.recently-read');
-
-function removeAllBooks() {
-  bookContainer.innerHTML = "";
-}
