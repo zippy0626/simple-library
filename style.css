@@ -113,6 +113,8 @@ label {
 
 #search-bar::placeholder {
     text-align: end;
+    font-size: 10px;
+    font-weight: bold;
 }
 
 /* Nav Tabs */
