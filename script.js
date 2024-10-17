@@ -107,9 +107,9 @@ function addNewBook(title, author, pages, isRead, image) {
   
   console.log(newBook);
 
-  addBookToDOM(newBook)
-
   myLibrary.push(newBook)
+
+  addBookToDOM(newBook)
 
   resetInputs()
 }
