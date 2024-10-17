@@ -90,6 +90,7 @@ label {
 .side-nav-search label {
     width: var(--labelWidth);
     height: var(--labelHeight);
+    opacity: .6;
 }
 
 #search-bar {

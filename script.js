@@ -15,9 +15,12 @@ const book1 = new Book("Example 1", "John Doe", 200, "yes");
 const book2 = new Book("Example 2", "John Doe", 200, "no");
 const book3 = new Book("Example 3", "John Doe", 200, "no");
 const book4 = new Book("Example 4", "John Doe", 200, "yes");
-const book5 = new Book("Example 5", "John Doe", 200, "yes");
+const book5 = new Book("Example 5", "John Doe", 200, "no");
+const book6 = new Book("Example 6", "John Doe", 200, "no");
+const book7 = new Book("Example 7", "John Doe", 200, "yes");
+const book8 = new Book("Example 8", "John Doe", 200, "yes");
 
-const exampleBooks = [book1, book2, book3, book4, book5]
+const exampleBooks = [book1, book2, book3, book4, book5, book6, book7, book8]
 exampleBooks.forEach((book) => {
   myLibrary.push(book)
 });
@@ -99,7 +102,7 @@ function addBookToDOM(bookObj) {
       </div>
     </div>
     `
-    
+
     // If no Image set default image
     if (bookObj.image===undefined) {
       const bookImage = bookElement.querySelector('.book-image');
@@ -108,7 +111,7 @@ function addBookToDOM(bookObj) {
       bookImage.style.top = "50%"
       bookImage.style.left = "50%"
       bookImage.style.transform = "translate(-50%, -50%)"
-      bookImage.style.opacity = ".1"
+      bookImage.style.opacity = ".05"
     }
 
     bookContainer.appendChild(bookElement)
