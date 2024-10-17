@@ -24,6 +24,12 @@ exampleBooks.forEach((book) => {
 
 // BOOK CONTAINER
 const bookContainer = document.querySelector('.book-section');
+const yourBooksTab = document.querySelector('.your-books');
+yourBooksTab.addEventListener('click', () => {
+  noBooksHereMsg.classList.add('hidden')
+  removeAllBooks()
+  showAllBooks()
+});
 
 function removeAllBooks() {
   bookContainer.innerHTML = "";
@@ -194,7 +200,7 @@ function toggleReadStatus(element) {
 }
 
 
-// REMOVE BOOK + CONFIRM DELETE MODAL
+// REMOVE SINGLE BOOK + CONFIRM DELETE MODAL
 const confirmDeleteModal = document.querySelector('.modal-confirm-delete'); 
 const confirmYesBtn = document.querySelector('.confirm-yes-btn');
 const confirmCancelBtn = document.querySelector('.confirm-cancel-btn');
@@ -235,4 +241,27 @@ confirmYesBtn.addEventListener('click', removeBook)
 
 // RECENTLY READ BOOK TAB BUTTON
 const recentlyReadTabBtn = document.querySelector('.recently-read');
+const noBooksHereMsg = document.querySelector('.no-books-here-msg');
 
+function showRecentlyRead() {
+  removeAllBooks()
+  // Copy from myLibrary
+  // If isRead is changed in MyLibrary this will always update
+  let myLibraryCopy = Array.from(myLibrary);
+  console.log(myLibraryCopy);
+  
+  if (myLibraryCopy.length) {
+    myLibraryCopy.forEach((book) => {
+      if (book.isRead==='yes') {
+        addBookToDOM(book)
+      }
+    });
+  }
+
+  if (!bookContainer.innerHTML) {
+    noBooksHereMsg.classList.remove('hidden')
+  } else {
+    noBooksHereMsg.classList.add('hidden')
+  }
+}
+recentlyReadTabBtn.addEventListener('click', showRecentlyRead);

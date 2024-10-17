@@ -172,6 +172,7 @@ label {
     height: 100%;
     padding: 16px 10px 16px 20px;
     background-color: white;
+    position: relative;
 }
 
 /* Book card */
@@ -538,4 +539,13 @@ input[type="radio"]:checked::after {
 }
 .modal-confirm-delete-buttons button:active {
     background-color: var(--activeColor);
+}
+
+/* No Books Msg */
+.no-books-here-msg {
+    position: absolute;
+    top: 45%;
+    left: 47%;
+    font-size: 1.3rem;
+    user-select: none;
 }
