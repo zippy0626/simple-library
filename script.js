@@ -2,12 +2,12 @@
 let myLibrary = [];
 
 // Book Object
-function Book(title, author, pages, isRead) {
+function Book(title, author, pages, isRead, image) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.isRead = isRead;
-  // this.image = image;
+  this.image = image;
 }
 
 // Example Books
@@ -44,9 +44,15 @@ function addBookToDOM(bookObj) {
     // set index number based on array bookObj is in
     bookElement.dataset.indexNumber = myLibrary.indexOf(bookObj)
     
+    // Image functionality, makes src path
+    let bookImgSrc = "";
+    if (bookObj.image) {
+      bookImgSrc = URL.createObjectURL(bookObj.image);
+    }
+
     bookElement.innerHTML = `
     <div class="book-img-container">
-      <img src="" alt="book cover">
+      <img src="${bookImgSrc}" alt="book cover">
     </div>
 
     <div class="book-desc">
@@ -90,9 +96,11 @@ function addBookToDOM(bookObj) {
 
 
 // ADD NEW BOOK via MODAL FORM
-function addNewBook(bookTitle, bookAuthor, bookPages, isRead) {
-  const newBook = new Book(bookTitle, bookAuthor, bookPages, isRead);
+function addNewBook(title, author, pages, isRead, image) {
+  const newBook = new Book(title, author, pages, isRead, image);
   
+  console.log(newBook);
+
   addBookToDOM(newBook)
 
   myLibrary.push(newBook)
@@ -144,7 +152,7 @@ form.addEventListener("submit", (e) => {
   const bookAuthor = formData.get("bookAuthor");
   let bookPages = formData.get("bookPages");
   let isRead = formData.get("isRead");
-  const bookImg = formData.get("bookImg");
+  const image = formData.get("bookImg");
 
   if (bookPages.slice(0, 1) === "0" || !bookPages || bookPages < 0) {
     bookPages = "?";
@@ -153,7 +161,7 @@ form.addEventListener("submit", (e) => {
     isRead = "no"
   }
 
-  addNewBook(bookTitle, bookAuthor, bookPages, isRead);
+  addNewBook(bookTitle, bookAuthor, bookPages, isRead, image);
 
   hideModal()
 });
@@ -227,3 +235,4 @@ confirmYesBtn.addEventListener('click', removeBook)
 
 // RECENTLY READ BOOK TAB BUTTON
 const recentlyReadTabBtn = document.querySelector('.recently-read');
+
