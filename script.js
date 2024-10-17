@@ -54,11 +54,13 @@ function addBookToDOM(bookObj) {
     let bookImgSrc = "";
     if (bookObj.image) {
       bookImgSrc = URL.createObjectURL(bookObj.image);
-    }
+    } else if (bookObj.image===undefined) {
+      bookImgSrc = "assets/icons/recentlyRead.svg"
+    } 
 
     bookElement.innerHTML = `
     <div class="book-img-container">
-      <img src="${bookImgSrc}" alt="book cover">
+      <img src="${bookImgSrc}" alt="book cover" class="book-image">
     </div>
 
     <div class="book-desc">
@@ -97,6 +99,18 @@ function addBookToDOM(bookObj) {
       </div>
     </div>
     `
+    
+    // If no Image set default image
+    if (bookObj.image===undefined) {
+      const bookImage = bookElement.querySelector('.book-image');
+      bookImage.style.width = "50%"
+      bookImage.style.height = "50%"
+      bookImage.style.top = "50%"
+      bookImage.style.left = "50%"
+      bookImage.style.transform = "translate(-50%, -50%)"
+      bookImage.style.opacity = ".1"
+    }
+
     bookContainer.appendChild(bookElement)
 }
 

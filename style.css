@@ -203,6 +203,7 @@ label {
     right: 0;
     width: 100%;
     transition: .5s;
+    text-align: center;
 }
 
 /* Book Hover "Animation" */
