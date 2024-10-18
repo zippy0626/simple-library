@@ -11,19 +11,24 @@ function Book(title, author, pages, isRead, image) {
 }
 
 // Example Books
-const book1 = new Book("Example 1", "John Doe", 200, "yes");
-const book2 = new Book("Example 2", "John Doe", 200, "no");
-const book3 = new Book("Example 3", "John Doe", 200, "no");
-const book4 = new Book("Example 4", "John Doe", 200, "yes");
-const book5 = new Book("Example 5", "John Doe", 200, "no");
-const book6 = new Book("Example 6", "John Doe", 200, "no");
-const book7 = new Book("Example 7", "John Doe", 200, "yes");
-const book8 = new Book("Example 8", "John Doe", 200, "yes");
+const book1 = new Book("Bold Beginnings", "Benny Barker", 200, "yes");
+const book2 = new Book("Turbulent Times", "Tara Thompson", 200, "no");
+const book3 = new Book("Curious Chronicles", "Cathy Catherwood", 200, "no");
+const book4 = new Book("Amazing Adventures", "Annie Anderson", 200, "yes");
+const book5 = new Book("Heroic Heights", "Harry Henderson", 200, "no");
+const book6 = new Book("Silent Secrets", "Sally Sanders", 200, "no");
+const book7 = new Book("Daring Decisions", "Damian Davis", 200, "yes");
+const book8 = new Book("Shifting Shadows", "Shawn Sherwood", 200, "yes");
 
 const exampleBooks = [book1, book2, book3, book4, book5, book6, book7, book8]
 exampleBooks.forEach((book) => {
   myLibrary.push(book)
 });
+
+
+// SEARCH BAR INPUT STRING FOR SEARCH BAR FUNCTIONALITY
+let searchResultNotFoundMsg = document.querySelector('.search-result-not-found');
+
 
 // BOOK CONTAINER
 const bookContainer = document.querySelector('.book-section');
@@ -39,6 +44,8 @@ function removeAllBooks() {
 }
 
 function showAllBooks() {
+  searchResultNotFoundMsg.classList.add("hidden")
+
   myLibrary.forEach((book) => {
     addBookToDOM(book)
   });
@@ -140,6 +147,7 @@ const cancelBtn = document.querySelector(".cancel-btn");
 const addNewBookTabBtn = document.querySelector(".add-new-book");
 
 function showModal() {
+  searchResultNotFoundMsg.classList.add("hidden")
   modal.classList.remove("hidden");
   overlay.classList.remove("hidden");
 }
@@ -262,10 +270,11 @@ const noBooksHereMsg = document.querySelector('.no-books-here-msg');
 
 function showRecentlyRead() {
   removeAllBooks()
+  searchResultNotFoundMsg.classList.add("hidden")
+
   // Copy from myLibrary
   // If isRead is changed in MyLibrary this will always update
   let myLibraryCopy = Array.from(myLibrary);
-  console.log(myLibraryCopy);
   
   if (myLibraryCopy.length) {
     myLibraryCopy.forEach((book) => {
@@ -282,3 +291,63 @@ function showRecentlyRead() {
   }
 }
 recentlyReadTabBtn.addEventListener('click', showRecentlyRead);
+
+
+// SEARCH BAR FUNCTIONALITY
+const searchBar = document.querySelector('#search-bar');
+const searchIcon = document.querySelector('[for="search-bar"]');
+
+function searchBook() {
+  // this will update every time
+  let searchResultNotFoundMsg = document.querySelector('.search-result-not-found');
+  
+  const searchValue = searchBar.value.trim().toLowerCase(); //string
+  const seperatedSearchWords = searchValue.split(" "); //array
+  let SRCurrentClassList = searchResultNotFoundMsg.classList //domtokenlist
+  
+  if (!searchValue && SRCurrentClassList.contains("hidden")) {
+    removeAllBooks()
+    SRCurrentClassList.remove("hidden")
+    return;
+  }
+  if (!searchValue && !SRCurrentClassList.contains("hidden")) {
+    removeAllBooks()
+    SRCurrentClassList.add("hidden")
+    showAllBooks()
+    return;
+  } 
+
+  let matchedBooks = []
+
+  for (const book of myLibrary) {
+    const bookTitle = book.title.toLowerCase()
+    const bookAuthor = book.author.toLowerCase()
+
+    for (const searchWord of seperatedSearchWords) {
+      if (bookTitle.includes(searchWord) || bookAuthor.includes(searchWord)) {
+        matchedBooks.push(book)
+        break;
+      }
+    }
+  }
+
+  if (matchedBooks.length) {
+    removeAllBooks()
+
+    for (const book of matchedBooks) {
+      addBookToDOM(book)
+    }
+  } else {
+    removeAllBooks()
+    searchResultNotFoundMsg.classList.remove("hidden")
+  };
+}
+searchBar.addEventListener('keydown', (e) => {
+  const pressedKey = e.key;
+
+  if (pressedKey==="Enter") {
+    e.preventDefault()
+    searchBook()
+    return;
+  }
+});
