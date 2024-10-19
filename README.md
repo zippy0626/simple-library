@@ -2,4 +2,4 @@
 
 <img src="preview.png" alt="preview" width="800">
 
-Live:
+Live: https://zippy0626.github.io/simple-library/
