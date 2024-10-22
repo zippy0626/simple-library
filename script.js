@@ -317,6 +317,9 @@ function searchBook() {
     showAllBooks()
     return;
   }
+  if (!searchValue || searchValue.length < 2) {
+    return;
+  }
 
   let matchedBooks = []
 
