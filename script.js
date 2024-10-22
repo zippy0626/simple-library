@@ -299,6 +299,7 @@ const searchIcon = document.querySelector('[for="search-bar"]');
 
 function searchBook() {
   // this will update every time
+  // this is for the not found message
   let searchResultNotFoundMsg = document.querySelector('.search-result-not-found');
   
   const searchValue = searchBar.value.trim().toLowerCase(); //string
@@ -315,7 +316,11 @@ function searchBook() {
     SRCurrentClassList.add("hidden")
     showAllBooks()
     return;
-  } 
+  }
+  if (searchValue.length <= 1 || !searchValue) {
+    console.log("Invalid Search Result");
+    return;
+  }
 
   let matchedBooks = []
 
