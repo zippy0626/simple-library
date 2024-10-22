@@ -317,10 +317,6 @@ function searchBook() {
     showAllBooks()
     return;
   }
-  if (searchValue.length <= 1 || !searchValue) {
-    console.log("Invalid Search Result");
-    return;
-  }
 
   let matchedBooks = []
 
