@@ -281,7 +281,7 @@ function showRecentlyRead() {
       if (book.isRead==='yes') {
         addBookToDOM(book)
       }
-    });
+    })
   }
 
   if (!bookContainer.innerHTML) {
