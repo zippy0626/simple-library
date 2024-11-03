@@ -49,7 +49,10 @@ class Library {
     let books = Array.isArray(book) ? book : [book];
 
     books.forEach((book) => {
-        this._bookStorage.push(book)
+      book.title = book.title.toLowerCase().trim()  
+      book.author = book.author.toLowerCase().trim()
+    
+      this._bookStorage.push(book)
     })
   }
 
@@ -125,7 +128,7 @@ const DOMManager = (function() {
     const bookTitle = book.title
     const bookAuthor = book.author
     const bookPages = book.pages
-    const bookIsRead = book.isRead
+    const bookIsRead = book._isRead
     let bookImg = book.image
 
     let bookImgSrc;
@@ -269,16 +272,17 @@ form.addEventListener('submit', (e) => {
   const title = formData.get("bookTitle");
   const author = formData.get("bookAuthor");
   let pages = formData.get("bookPages");
-  let isRead = formData.get("isRead");
+  let isRead = formData.get("_isRead");
   let image = formData.get("bookImg");
 
   if (pages.slice(0, 1) === "0" || !pages || pages < 0) pages = "?";
   if (!isRead) isRead = false;
 
-  let book = { title, author, pages, isRead }
-  console.log(book);
+  let book = { title, author, pages, _isRead:isRead }
 
   DOMManager.appendBookTo(".book-section", book)
+  myLibrary.addToStorage(book)
+
   resetModalInputs()
   DOMManager.toggleHidden(".modal")
   DOMManager.toggleHidden(".overlay")
