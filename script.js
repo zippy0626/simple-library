@@ -232,9 +232,31 @@ recentlyReadBtn.addEventListener('click', () => {
   });
 });
 
-// Handle Form Information
+// Handle Form Information + Modal Actions
+const modal = DOMManager.select(".modal");
+const modalCancelBtn = modal.querySelector(".cancel-btn")
+
+function resetModalInputs() {
+  const modalInputs = document.querySelector('.modal')
+    .querySelectorAll("input");
+
+  for (const inputField of modalInputs) {
+    if (inputField.type==="text" || 
+      inputField.type==="number") inputField.value = "";
+
+    if (inputField.type === "radio") 
+      inputField.checked = false;
+  }
+}
+
 const addNewBookBtn = DOMManager.select(".add-new-book")
 addNewBookBtn.addEventListener('click', () => {
+  DOMManager.toggleHidden(".modal")
+  DOMManager.toggleHidden(".overlay")
+});
+
+//Modal Actions
+modalCancelBtn.addEventListener('click', () => {
   DOMManager.toggleHidden(".modal")
   DOMManager.toggleHidden(".overlay")
 });
@@ -244,18 +266,20 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const formData = new FormData(form);
-  const bookTitle = formData.get("bookTitle");
-  const bookAuthor = formData.get("bookAuthor");
-  let bookPages = formData.get("bookPages");
+  const title = formData.get("bookTitle");
+  const author = formData.get("bookAuthor");
+  let pages = formData.get("bookPages");
   let isRead = formData.get("isRead");
   let image = formData.get("bookImg");
 
-  if (bookPages.slice(0, 1) === "0" || !bookPages || bookPages < 0) bookPages = "?";
-  if (!isRead) isRead = "no";
+  if (pages.slice(0, 1) === "0" || !pages || pages < 0) pages = "?";
+  if (!isRead) isRead = false;
 
-  let book = { bookTitle, bookAuthor, bookPages, isRead }
+  let book = { title, author, pages, isRead }
+  console.log(book);
 
   DOMManager.appendBookTo(".book-section", book)
-
-  //hide modal
+  resetModalInputs()
+  DOMManager.toggleHidden(".modal")
+  DOMManager.toggleHidden(".overlay")
 });
