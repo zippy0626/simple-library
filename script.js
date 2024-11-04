@@ -1,10 +1,10 @@
 class Book {
-  constructor(title, author, pages, isRead, image) {
+  constructor(title, author, pages, isRead, imageSrc) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this._isRead = isRead;
-    this.image = image;
+    this.imageSrc = imageSrc;
   }
 
   get isRead() {
@@ -16,6 +16,7 @@ class Book {
   }
 }
 
+const book0 = new Book("The Hunger Games", "Suzzane Collins", 300, false, "assets/the-hunger-games-cover.jpg");
 const book1 = new Book("Bold Beginnings", "Benny Barker", 200, true);
 const book2 = new Book("Turbulent Times", "Tara Thompson", 200, false);
 const book3 = new Book("Curious Chronicles", "Cathy Catherwood", 200, false);
@@ -25,7 +26,7 @@ const book6 = new Book("Silent Secrets", "Sally Sanders", 200, false);
 const book7 = new Book("Daring Decisions", "Damian Davis", 200, true);
 const book8 = new Book("Shifting Shadows", "Shawn Sherwood", 200, true);
 
-let books = [book1, book2, book3, book4, book5, book6, book7, book8, ]
+let books = [ book0, book1, book2, book3, book4, book5, book6, book7, book8, ]
 
 class Library {
   constructor(name) {
@@ -128,11 +129,10 @@ const DOMManager = (function() {
     const bookTitle = book.title
     const bookAuthor = book.author
     const bookPages = book.pages
-    const bookIsRead = book._isRead
-    let bookImg = book.image
+    const bookIsRead = book.isRead
+    let bookImgSrc = book.imageSrc
 
-    let bookImgSrc;
-    if (!bookImg) bookImgSrc = "assets/icons/recentlyRead.svg";
+    if (!bookImgSrc) bookImgSrc = "assets/icons/recentlyRead.svg";
 
     const bookElement = document.createElement('div');
       bookElement.classList.add("book");
@@ -149,38 +149,38 @@ const DOMManager = (function() {
           <p class="book-pages" aria-label="book-pages">${bookPages} pages</p>
 
           <div class="book-actions">
-            <div>
+            <div class="read-now-btn">
               <p class="book-read-now book-action-text">Read Now</p>
             </div>
 
             ${bookIsRead ?
-            `<div class="contain-book-already-read" onclick="">
+            `<div class="contain-book-already-read">
               <img src="assets/icons/check.svg" alt="Already Read" class="icon book-action-icon">
-              <p class="book-mark-read book-action-text">Already Read</p>
+              <p class="already-read book-action-text">Already Read</p>
             </div>
 
-            <div class="contain-book-mark-read hidden" onclick="">
-              <p class="book-mark-read book-action-text">Mark as Read</p>
+            <div class="contain-book-mark-read hidden">
+              <p class="mark-read book-action-text">Mark as Read</p>
             </div>`
             :
-            `<div class="contain-book-already-read hidden" onclick="">
+            `<div class="contain-book-already-read hidden">
               <img src="assets/icons/check.svg" alt="Already Read" class="icon book-action-icon">
-              <p class="book-mark-read book-action-text">Already Read</p>
+              <p class="already-read book-action-text">Already Read</p>
             </div>
             
-            <div class="contain-book-mark-read" onclick="">
-              <p class="book-mark-read book-action-text">Mark as Read</p>
+            <div class="contain-book-mark-read">
+              <p class="mark-read book-action-text">Mark as Read</p>
             </div>`
             }
 
-            <div onclick="">
+            <div class="delete-btn">
               <p class="book-delete book-action-text">Delete</p>
             </div>
           </div>
         </div>
       `
 
-    if (!bookImg) {
+    if (bookImgSrc==="assets/icons/recentlyRead.svg") {
       const bookImgEle = bookElement.querySelector('.book-image');
       bookImgEle.style.width = "50%"
       bookImgEle.style.height = "50%"
@@ -213,8 +213,9 @@ const yourBooksBtn = DOMManager.select(".your-books")
 
 yourBooksBtn.addEventListener('click', () => {
   const bookSection = DOMManager.select(".book-section")
+  DOMManager.emptyInnerHTML(".book-section")
   
-  if (bookSection.childElementCount === myLibrary.bookStorage.length + 1) {
+  if (bookSection.childElementCount >= myLibrary.bookStorage.length) {
     return;
   }//this handles all future added books counting display book
 
@@ -272,18 +273,49 @@ form.addEventListener('submit', (e) => {
   const title = formData.get("bookTitle");
   const author = formData.get("bookAuthor");
   let pages = formData.get("bookPages");
-  let isRead = formData.get("_isRead");
+  let _isRead = formData.get("isRead");
   let image = formData.get("bookImg");
 
   if (pages.slice(0, 1) === "0" || !pages || pages < 0) pages = "?";
-  if (!isRead) isRead = false;
+    pages = Number(pages)
+  if (!_isRead) _isRead = false;
+  if (_isRead==="false") _isRead = false;
+  if (_isRead==="true") _isRead = true;
 
-  let book = { title, author, pages, _isRead:isRead }
+  let book = { title, author, pages , _isRead }
 
-  DOMManager.appendBookTo(".book-section", book)
   myLibrary.addToStorage(book)
+  DOMManager.appendBookTo(".book-section", book)
 
   resetModalInputs()
   DOMManager.toggleHidden(".modal")
   DOMManager.toggleHidden(".overlay")
+});
+
+//Handle Book clicking Recently/Already Read Tab/Delete Button
+const bookSection = DOMManager.select(".book-section");
+bookSection.addEventListener('click', (e) => {
+  const bookEle = e.target.closest(".book");
+    if (!bookEle) return;
+  const bookIndex = bookEle.dataset.indexNumber;//account for dummy book
+  const markReadTab = bookEle.querySelector(".contain-book-mark-read")
+  const alreadyReadTab = bookEle.querySelector(".contain-book-already-read");
+
+  const clickedEle = e.target;
+  const clickedEleClassList = clickedEle.classList.value;
+    if (clickedEleClassList.includes("mark-read")) {
+      myLibrary.getFromStorage(bookIndex).isRead = true;
+      console.log(myLibrary.getFromStorage(bookIndex).isRead)
+      markReadTab.classList.toggle("hidden")
+      alreadyReadTab.classList.toggle("hidden")
+      return;
+    }
+    
+    if (clickedEleClassList.includes("already-read")) {
+      myLibrary.getFromStorage(bookIndex).isRead = false;
+      console.log(myLibrary.getFromStorage(bookIndex).isRead)
+      markReadTab.classList.toggle("hidden")
+      alreadyReadTab.classList.toggle("hidden")
+      return;
+    }
 });
