@@ -57,14 +57,9 @@ class Library {
     })
   }
 
-  removeFromStorage(bookTitle) {//str
-    let title = bookTitle ? 
-      bookTitle.toLowerCase().trim() : 
-      console.log("Provide a Book Title!") 
-
-    this._bookStorage = this._bookStorage.filter((book) => 
-      !book.title.toLowerCase().includes(title)
-    );
+  removeFromStorage(index) {//int
+    if (!index) return;
+    return this._bookStorage.splice(index, 1)
   }
 
   removeAllStorage() {
@@ -292,11 +287,15 @@ form.addEventListener('submit', (e) => {
   DOMManager.toggleHidden(".overlay")
 });
 
-//Handle Book clicking Recently/Already Read Tab/Delete Button
+//Handle clicking Recently/Already Read Tab/Delete Button on Book
 const bookSection = DOMManager.select(".book-section");
+let storage; //temp storage
+
 bookSection.addEventListener('click', (e) => {
   const bookEle = e.target.closest(".book");
     if (!bookEle) return;
+  storage = bookEle;
+
   const bookIndex = bookEle.dataset.indexNumber;//account for dummy book
   const markReadTab = bookEle.querySelector(".contain-book-mark-read")
   const alreadyReadTab = bookEle.querySelector(".contain-book-already-read");
@@ -305,7 +304,6 @@ bookSection.addEventListener('click', (e) => {
   const clickedEleClassList = clickedEle.classList.value;
     if (clickedEleClassList.includes("mark-read")) {
       myLibrary.getFromStorage(bookIndex).isRead = true;
-      console.log(myLibrary.getFromStorage(bookIndex).isRead)
       markReadTab.classList.toggle("hidden")
       alreadyReadTab.classList.toggle("hidden")
       return;
@@ -313,9 +311,41 @@ bookSection.addEventListener('click', (e) => {
     
     if (clickedEleClassList.includes("already-read")) {
       myLibrary.getFromStorage(bookIndex).isRead = false;
-      console.log(myLibrary.getFromStorage(bookIndex).isRead)
       markReadTab.classList.toggle("hidden")
       alreadyReadTab.classList.toggle("hidden")
       return;
     }
+
+    if (
+      clickedEleClassList.includes("delete-btn") ||
+      clickedEleClassList.includes("book-delete")
+      ) 
+    {
+      DOMManager.toggleHidden(".modal-confirm-delete")
+      DOMManager.toggleHidden(".confirm-modal-overlay")
+      return;
+    }
+});
+
+//Handle Delete Book Modal + Overlay Actions
+const delCancelBtn = DOMManager.select(".confirm-cancel-btn");
+const delYesBtn = DOMManager.select(".confirm-yes-btn")
+const delOverlay = DOMManager.select(".confirm-modal-overlay");
+
+delCancelBtn.addEventListener('click', () => {
+  DOMManager.toggleHidden(".modal-confirm-delete")
+  DOMManager.toggleHidden(".confirm-modal-overlay")
+});
+delOverlay.addEventListener('click', () => {
+  DOMManager.toggleHidden(".modal-confirm-delete")
+  DOMManager.toggleHidden(".confirm-modal-overlay")
+});
+delYesBtn.addEventListener('click', () => {
+  let index = storage.dataset.indexNumber;
+
+  myLibrary.removeFromStorage(index)
+  storage.remove();
+
+  DOMManager.toggleHidden(".modal-confirm-delete")
+  DOMManager.toggleHidden(".confirm-modal-overlay")
 });
