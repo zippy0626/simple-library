@@ -1,163 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Library</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="assets/icons/library.svg">
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="assets/icons/library.svg" />
+  </head>
 
-<body>
+  <body>
     <div class="side-nav">
-        <div class="side-nav-logo">
-            <p class="logo-text">Your Library</p>
-        </div>
+      <div class="side-nav-logo">
+        <p class="logo-text">Your Library</p>
+      </div>
 
-        <div class="side-nav-search">
-            <form action="">
-                <label for="search-bar">
-                    <img src="assets/icons/searchIcon.svg" alt="Search" class="icon search-icon"
-                    title="Search Book"
-                    draggable="false">
-                </label>
-                <input type="text" id="search-bar" name="searchInput" placeholder="Search by title / author" minlength="2" maxlength="50">
-            </form>
-        </div>
+      <div class="side-nav-search">
+        <form action="">
+          <label for="search-bar">
+            <img
+              src="assets/icons/searchIcon.svg"
+              alt="Search"
+              class="icon search-icon"
+              title="Search Book"
+              draggable="false"
+            />
+          </label>
+          <input
+            type="text"
+            id="search-bar"
+            name="searchInput"
+            placeholder="Search by title / author"
+            minlength="2"
+            maxlength="50"
+          />
+        </form>
+      </div>
 
-        <div class="nav-tabs">
-            <div class="your-books tab">
-                <img src="assets/icons/library.svg" alt="Your Books" title="Your Books"
-                class="nav-tab-icon" draggable="false">
-                <p>Your Books</p>
-            </div>
-            <div class="recently-read tab">
-                <img src="assets/icons/recentlyRead.svg" alt="Recently Read" title="Recently Read"
-                class="nav-tab-icon" draggable="false">
-                <p>Recently Read</p>
-            </div>
-            <div class="add-new-book tab">
-                <img src="assets/icons/addBook.svg" alt="Add new book" title="Add new book"
-                class="nav-tab-icon" draggable="false">
-                <p>Add New Book</p>
-            </div>
+      <div class="nav-tabs">
+        <div class="your-books tab">
+          <img
+            src="assets/icons/library.svg"
+            alt="Your Books"
+            title="Your Books"
+            class="nav-tab-icon"
+            draggable="false"
+          />
+          <p>Your Books</p>
         </div>
+        <div class="recently-read tab">
+          <img
+            src="assets/icons/recentlyRead.svg"
+            alt="Recently Read"
+            title="Recently Read"
+            class="nav-tab-icon"
+            draggable="false"
+          />
+          <p>Recently Read</p>
+        </div>
+        <div class="add-new-book tab">
+          <img
+            src="assets/icons/addBook.svg"
+            alt="Add new book"
+            title="Add new book"
+            class="nav-tab-icon"
+            draggable="false"
+          />
+          <p>Add New Book</p>
+        </div>
+      </div>
     </div>
 
     <div class="book-section">
-
-        <div class="book" data-index-number="0">
-            <div class="book-img-container">
-                <img src="assets/the-hunger-games-cover.jpg" alt="book cover" class="book-image">
-            </div>
-            <div class="book-desc">
-                <p class="book-title" aria-label="book-title">The Hunger Games</p>
-                <p class="book-author" aria-label="book-author">Suzanne Collins</p>
-                <p class="book-pages" aria-label="book-pages">300 pages</p>
-
-                <div class="book-actions">
-                    <div>
-                        <p class="book-read-now book-action-text">Read Now</p>
-                    </div>
-
-                    <div class="contain-book-mark-read" onclick="toggleReadStatus(this)">
-                        <p class="book-mark-read book-action-text">Mark as Read</p>
-                    </div>
-
-                    <div class="contain-book-already-read hidden" onclick="toggleReadStatus(this)">
-                        <img src="assets/icons/check.svg" alt="Already Read" class="icon book-action-icon">
-                        <p class="book-already-read book-action-text">Already Read</p>
-                    </div>
-
-                    <div onclick="showConfirmDelModal(this)">
-                        <p class="book-delete book-action-text">Delete</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
     </div>
 
     <div class="modal hidden">
-        <p class="modal-desc">Add New Book</p>
+      <p class="modal-desc">Add New Book</p>
 
-        <form action="post" id="form">
-            <div class="form-input-container">
-                <label for="book-title">Book Title</label>
-                <input type="text" id="book-title" name="bookTitle"
-                    aria-required="true" required="true" 
-                    pattern="^[a-zA-Z0-9 ,.'!?:\-]+$" 
-                    minlength="2" maxlength="75"
-                >
-            </div>
+      <form action="post" id="form">
+        <div class="form-input-container">
+          <label for="book-title">Book Title</label>
+          <input
+            type="text"
+            id="book-title"
+            name="bookTitle"
+            aria-required="true"
+            required="true"
+            pattern="^[a-zA-Z0-9 ,.'!?:\-]+$"
+            minlength="2"
+            maxlength="75"
+          />
+        </div>
 
-            <div class="form-input-container">
-                <label for="book-author">Book Author</label>
-                <input type="text" id="book-author" name="bookAuthor" 
-                    aria-required="true" required="true" 
-                    pattern="^[a-zA-Z0-9 ,.'!?:\-]+$" 
-                    minlength="2" maxlength="75"
-                >
-            </div>
+        <div class="form-input-container">
+          <label for="book-author">Book Author</label>
+          <input
+            type="text"
+            id="book-author"
+            name="bookAuthor"
+            aria-required="true"
+            required="true"
+            pattern="^[a-zA-Z0-9 ,.'!?:\-]+$"
+            minlength="2"
+            maxlength="75"
+          />
+        </div>
 
-            <div class="form-input-container">
-                <label for="book-pages">Pages</label>
-                <input type="number" id="book-pages" name="bookPages" 
-                    aria-required="false"
-                    pattern="^([1-9][0-9]*)$"
-                    minlength="1" maxlength="5"
-                >
-            </div>
+        <div class="form-input-container">
+          <label for="book-pages">Pages</label>
+          <input
+            type="number"
+            id="book-pages"
+            name="bookPages"
+            aria-required="false"
+            pattern="^([1-9][0-9]*)$"
+            minlength="1"
+            maxlength="5"
+          />
+        </div>
 
-            <div class="form-radio-buttons">
-                <p class="form-text">Already Read?</p>
-                
-                <div>
-                    <label for="is-read-yes">Yes</label>
-                    <input type="radio" id="is-read-yes" name="isRead" value="yes">
-                    <label for="is-read-no">No</label>
-                    <input type="radio" id="is-read-no" name="isRead" value="no">
-                </div>
-            </div>
+        <div class="form-radio-buttons">
+          <p class="form-text">Already Read?</p>
 
-            <div id="form-upload-container">
-                <label for="book-img">Upload Cover Image</label>
-                <input type="file" id="book-img" name="bookImg" title=" " accept="image/*">
-            </div>
+          <div>
+            <label for="is-read-yes">Yes</label>
+            <input type="radio" id="is-read-yes" name="isRead" value="true" />
+            <label for="is-read-no">No</label>
+            <input type="radio" id="is-read-no" name="isRead" value="false" />
+          </div>
+        </div>
 
-            <div class="form-sc-btn-container">
-                <div class="form-sc-btns">
-                    <button type="submit" class="add-book-btn">Add book</button>
-                    <button type="button" class="cancel-btn">Cancel</button>
-                </div>
-            </div>
-        </form>
+        <div id="form-upload-container">
+          <label for="book-img">Upload Cover Image</label>
+          <input
+            type="file"
+            id="book-img"
+            name="bookImg"
+            title=" "
+            accept="image/*"
+          />
+        </div>
+
+        <div class="form-sc-btn-container">
+          <div class="form-sc-btns">
+            <button type="submit" class="add-book-btn">Add book</button>
+            <button type="button" class="cancel-btn">Cancel</button>
+          </div>
+        </div>
+      </form>
     </div>
 
     <div class="overlay hidden"></div>
 
     <div class="modal-confirm-delete hidden">
-        <p class="modal-desc">Are you sure you want to delete this book?</p>
-        <p class="modal-text">This action cannot be undone.</p>
+      <p class="modal-desc">Are you sure you want to delete this book?</p>
+      <p class="modal-text">This action cannot be undone.</p>
 
-        <div class="modal-confirm-delete-button-container">
-            <div class="modal-confirm-delete-buttons">
-                <button type="button" class="confirm-cancel-btn" onclick="hideConfirmDelModal()">Cancel</button>
-                <button type="button" class="confirm-yes-btn">Yes</button>
-            </div>
+      <div class="modal-confirm-delete-button-container">
+        <div class="modal-confirm-delete-buttons">
+          <button type="button" class="confirm-cancel-btn" onclick="">
+            Cancel
+          </button>
+          <button type="button" class="confirm-yes-btn">Yes</button>
         </div>
+      </div>
     </div>
 
     <div class="overlay confirm-modal-overlay hidden"></div>
 
-    <div class="no-books-here-msg hidden">
-        No Recently Read Books. GO READ!
-    </div>
+    <div class="no-books-here-msg hidden">No Recently Read Books. GO READ!</div>
 
     <div class="search-result-not-found hidden">
-        Search result not found. Try again.
+      Search result not found. Try again.
     </div>
-</body>
+  </body>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </html>
