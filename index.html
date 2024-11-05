@@ -15,7 +15,7 @@
       </div>
 
       <div class="side-nav-search">
-        <form action="">
+        <form action="POST">
           <label for="search-bar">
             <img
               src="assets/icons/searchIcon.svg"
@@ -23,6 +23,7 @@
               class="icon search-icon"
               title="Search Book"
               draggable="false"
+              aria-label="Search Book"
             />
           </label>
           <input
@@ -32,6 +33,7 @@
             placeholder="Search by title / author"
             minlength="2"
             maxlength="50"
+            aria-label="Search Bar"
           />
         </form>
       </div>

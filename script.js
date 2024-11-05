@@ -5,6 +5,7 @@ class Book {
     this.pages = pages;
     this._isRead = isRead;
     this.imageSrc = imageSrc;
+    this.searchKey = `${title} ${author}`.toLowerCase();
   }
 
   get isRead() {
@@ -66,18 +67,8 @@ class Library {
     this._bookStorage = [];
   }
 
-  getIndexOf(bookSearchWords) {//str
-    let searchWords = bookSearchWords //str
-      .toLowerCase()
-      .replace(/\s/g, "");
-    
-    return this._bookStorage.findIndex((book) => {
-      let bookTitleAndAuthor = 
-        book.title.toLowerCase().replace(/\s/g, "") + 
-        book.author.toLowerCase().replace(/\s/g, "");
-
-      return bookTitleAndAuthor.includes(searchWords)
-    });
+  getBookTitleAuthor(book) {//obj
+    return book.title + book.author;
   }
 
   getFromStorage(index) {
@@ -114,6 +105,16 @@ const DOMManager = (function() {
   function toggleHidden(selector) {//str
     const element = select(selector);
     if (element) element.classList.toggle('hidden');
+  }
+
+  function addHiddenState(selector) {
+    const elementClasslist = select(selector).classList;
+    if (!elementClasslist.contains("hidden")) elementClasslist.add("hidden");
+  }
+
+  function removeHiddenState(selector) {
+    const elementClasslist = select(selector).classList;
+    if (elementClasslist.contains("hidden")) elementClasslist.remove("hidden");
   }
 
   function appendBookTo(selector, book) {//str, obj
@@ -194,6 +195,8 @@ const DOMManager = (function() {
     toggleHidden,
     appendBookTo,
     emptyInnerHTML,
+    addHiddenState,
+    removeHiddenState,
 
   }
 })();
@@ -208,6 +211,7 @@ const yourBooksBtn = DOMManager.select(".your-books")
 
 yourBooksBtn.addEventListener('click', () => {
   const bookSection = DOMManager.select(".book-section")
+  DOMManager.addHiddenState(".search-result-not-found")
   DOMManager.emptyInnerHTML(".book-section")
   
   if (bookSection.childElementCount >= myLibrary.bookStorage.length) {
@@ -223,6 +227,7 @@ yourBooksBtn.addEventListener('click', () => {
 const recentlyReadBtn = DOMManager.select(".recently-read")
 
 recentlyReadBtn.addEventListener('click', () => {
+  DOMManager.addHiddenState(".search-result-not-found");
   DOMManager.emptyInnerHTML(".book-section")
   const recentlyReadBooks = myLibrary.getRecentlyRead()
 
@@ -250,6 +255,7 @@ function resetModalInputs() {
 
 const addNewBookBtn = DOMManager.select(".add-new-book")
 addNewBookBtn.addEventListener('click', () => {
+  DOMManager.addHiddenState(".search-result-not-found");
   DOMManager.toggleHidden(".modal")
   DOMManager.toggleHidden(".overlay")
 });
@@ -348,4 +354,42 @@ delYesBtn.addEventListener('click', () => {
 
   DOMManager.toggleHidden(".modal-confirm-delete")
   DOMManager.toggleHidden(".confirm-modal-overlay")
+});
+
+//Handle Search Bar
+const searchBar = DOMManager.select("#search-bar")
+searchBar.addEventListener('keydown', function (e) {
+  const pressedKey = e.key;
+  if (pressedKey==="Enter") {
+    e.preventDefault()
+
+    let searchTerms = new Set(
+      searchBar.value
+        .trim()
+        .toLowerCase()
+        .split(" ")
+        .filter((term) => term.length > 1)
+    );
+    if (searchTerms) 
+      DOMManager.addHiddenState(".search-result-not-found");
+
+    DOMManager.emptyInnerHTML(".book-section");
+
+    for (const book of myLibrary.bookStorage) {
+      for (const term of searchTerms) {
+        if (book.searchKey.includes(term)) {
+          DOMManager.appendBookTo(".book-section", book);
+          return;
+        }
+      }
+    }
+    //Checks
+    if (searchTerms.size < 2) {
+      DOMManager.emptyInnerHTML(".book-section");
+      DOMManager.removeHiddenState(".search-result-not-found");
+      return;
+    };
+
+    DOMManager.removeHiddenState(".search-result-not-found");
+  };
 });
