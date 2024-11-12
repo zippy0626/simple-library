@@ -286,7 +286,7 @@ form.addEventListener('submit', (e) => {
   let book = { title, author, pages , _isRead }
 
   myLibrary.addToStorage(book)
-  DOMManager.appendBookTo(".book-section", book)
+  DOMManager.appendBookTo(".book-section", book);
 
   resetModalInputs()
   DOMManager.toggleHidden(".modal")
